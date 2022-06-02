@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        ".idea/": true,        
+        "venv/": true,
+        "**/.ipynb_checkpoints/": true,
+        "**/__pycache__/": true,
+        ".vscode/": true
+    }
+}
