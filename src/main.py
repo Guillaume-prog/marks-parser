@@ -1,11 +1,14 @@
 import numpy as np
 import tabula as tb
 import PyPDF2 as p2
-import sys, os, json
+import os, json
 
 STATS_FLAG = "moy - écart type"
-REPORT_BASE_PATH = "/var/code/pdf-marks/res/reports"
-ORDER_LIST_PATH = "/var/code/pdf-marks/res/order.json"
+REPORT_BASE_PATH = "./res/reports/"
+ORDER_LIST_PATH = "./res/order.json"
+
+def get_abs(path: str) -> str:
+    return os.path.join(os.getcwd(), path)
 
 """
 Main program
@@ -14,7 +17,7 @@ Main program
 
 def get_report_list():
     _list = {}
-    for file in os.listdir(REPORT_BASE_PATH):
+    for file in os.listdir(get_abs(REPORT_BASE_PATH)):
         year, semester = file.split(".")[0].split("-")
         if not year in _list:
             _list[year] = []
@@ -22,12 +25,12 @@ def get_report_list():
     return _list
 
 def get_student_report(student_id, student_year, student_semester):
-    path = f"{REPORT_BASE_PATH}/{student_year}-{student_semester}.pdf"
+    path = os.path.join(get_abs(REPORT_BASE_PATH), f"{student_year}-{student_semester}.pdf")
 
     if not os.path.exists(path):
         return { "error": "No report found" }
 
-    with open(ORDER_LIST_PATH, "r") as f:
+    with open(get_abs(ORDER_LIST_PATH), "r") as f:
         order_list = json.loads(f.read())
         order = order_list[f"{student_year}-{student_semester}"]
 
