@@ -1,30 +1,43 @@
-# import PyPDF2 as p2
-
-# student_id = "22108939"
-# marks_path = "res/marks.pdf"
-
-# reader = p2.PdfReader(marks_path)
-# writer = p2.PdfWriter()
-
-# with open("res/marks-raw.txt", "w") as f:
-#     for page_index in range(len(reader.pages)):
-#         page = reader.pages[page_index]
-#         if student_id in page.extract_text():
-#             print(page_index + 1)
-#             writer.add_page(page)
-#             f.write(page.extract_text())
-
-# with open("res/marks-edited.pdf", "wb") as f:
-#     writer.write(f)
-
 import numpy as np
 import tabula as tb
 import PyPDF2 as p2
+import sys, os, json
 
 STATS_FLAG = "moy - écart type"
+REPORT_BASE_PATH = "/var/code/pdf-marks/res/reports"
+ORDER_LIST_PATH = "/var/code/pdf-marks/res/order.json"
 
 """
 Main program
+=================================================================================================
+"""
+
+def get_report_list():
+    _list = {}
+    for file in os.listdir(REPORT_BASE_PATH):
+        year, semester = file.split(".")[0].split("-")
+        if not year in _list:
+            _list[year] = []
+        _list[year].append(semester)
+    return _list
+
+def get_student_report(student_id, student_year, student_semester):
+    path = f"{REPORT_BASE_PATH}/{student_year}-{student_semester}.pdf"
+
+    if not os.path.exists(path):
+        return { "error": "No report found" }
+
+    with open(ORDER_LIST_PATH, "r") as f:
+        order_list = json.loads(f.read())
+        order = order_list[f"{student_year}-{student_semester}"]
+
+    data = get_marks(path, student_id)
+    report = format_data(data, student_id, order=order)
+
+    return report
+
+"""
+Document parsing functions
 =================================================================================================
 """
 
@@ -51,10 +64,6 @@ def get_marks(path, student_id):
 
     return result
 
-"""
-Document parsing functions
-=================================================================================================
-"""
 
 def get_pages(pdf_path, student_id):
     reader = p2.PdfReader(pdf_path)
@@ -83,3 +92,57 @@ Organisation functions
 =================================================================================================
 """
 
+def format_data(data, student_id, order):
+    sections = []
+    marks = []
+
+    cur_section = -1
+    for (_subject, _student, _max, _min, _avg) in data[1:]:
+        if "|" in _student:
+            # Create section
+            subject_info = _subject.split(" ")
+            student_info = _student.split("|")
+
+            sections.append({
+                "code": subject_info[0],
+                "name": " ".join(subject_info[1:]),
+                "student": student_info[0],
+                "rank": student_info[-1],
+                "max": _max,
+                "min": _min,
+                "average": _avg,
+                "marks": marks
+            })
+
+            if order:
+                sections[cur_section]["marks"] = marks
+            
+            cur_section += 1
+            marks = []
+        else:
+            # Add mark to section
+            subject_info = _subject.split(" ")
+            marks.append({
+                "code": subject_info[0],
+                "name": " ".join(subject_info[1:]),
+                "student": _student,
+                "max": _max,
+                "min": _min,
+                "average": _avg
+            })
+
+    # Wrap all data in student info
+    (_subject, _student, _max, _min, _avg) = data[0]
+    student_info = _student.split("|")
+
+    report = {
+        "id": student_id,
+        "student": student_info[0],
+        "rank": student_info[-1],
+        "max": _max,
+        "min": _min,
+        "average": _avg,
+        "sections": sections
+    }
+
+    return report
