@@ -1,9 +1,17 @@
 {
     "files.exclude": {
-        ".idea/": true,        
-        "venv/": true,
+        "**/.idea/": true,        
+        "**/venv/": true,
         "**/.ipynb_checkpoints/": true,
         "**/__pycache__/": true,
-        ".vscode/": true
+        "**/.vscode/": true,
+        "**/node_modules/": true,
+        "**/package-lock.json": true,
+
+        "**/prettier.config.js": true,
+        "**/stylelint.config.js": true,
+        "**/postcss.config.js": true,
+
+        "**/tsconfig.*": true
     }
 }
