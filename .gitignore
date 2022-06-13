@@ -4,3 +4,6 @@
 **/res/
 **/.idea/
 **/node_modules/
+
+**/dist/
+**/requirements.txt

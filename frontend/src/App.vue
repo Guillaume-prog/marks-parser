@@ -6,7 +6,7 @@
   </div>
   <footer class="bg-gray-800 px-6 py-4 text-white">
     <div class="mx-auto flex w-1/2 justify-between">
-      <p>Site réalisé par Guillaume Roussin</p>
+      <p>Site réalisé par Guillaume Roussin et Julian Trani</p>
       <p>
         Contribuer au projet sur
         <a
