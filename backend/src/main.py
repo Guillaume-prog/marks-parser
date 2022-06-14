@@ -134,6 +134,10 @@ def format_data(data, student_id, order):
                 "average": _avg
             })
 
+            if order and data[-1] == [_subject, _student, _max, _min, _avg]:
+                sections[cur_section]["marks"] = marks
+
+
     # Wrap all data in student info
     (_subject, _student, _max, _min, _avg) = data[0]
     student_info = _student.split("|")

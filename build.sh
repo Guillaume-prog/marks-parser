@@ -18,12 +18,16 @@ cp -R ./ ../dist/backend
 rm -rf ../dist/backend/venv/ ../dist/backend/**/__pycache__/
 
 echo "Creating install script ..."
-echo "sudo apt install python3-pip -y
+echo "sudo apt install python3-pip python3-venv -y
 
 # Python setup
 cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt" > ../dist/install.sh
+
+echo "cd backend/
+source venv/bin/activate
+python3 src/server.py" > ../dist/run.sh
 
 echo "Done."
