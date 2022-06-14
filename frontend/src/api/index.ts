@@ -1,7 +1,8 @@
-const API_HOST = "http://127.0.0.1:8080";
+const API_HOST = "http://api.upssinotes.tk";
 
 /* Exports */
 
+console.log(API_HOST);
 export { get_list, get_report, YearList, Report };
 
 /* Methods */

@@ -1,10 +1,10 @@
 <template>
   <div v-if="report != null" class="flex flex-col gap-6 p-6">
     <div>
-      <h1>
+      <h1 class="mb-6 text-center text-2xl font-bold">
         Promotion {{ store.form.year }} - Semestre {{ store.form.semester }}
       </h1>
-      <h1>{{ report.id }}</h1>
+      <h3 class="mb-3">Numéro étudiant : {{ report.id }}</h3>
       <p>Rang: {{ report.rank }}</p>
 
       <p>Ma note: {{ report.student }}</p>
