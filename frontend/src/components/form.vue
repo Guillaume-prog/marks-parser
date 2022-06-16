@@ -1,5 +1,8 @@
 <template>
   <div>
+    <center>
+      <img class="w-64 pb-6" alt="logo" src="../assets/images/logo-upssi.png" />
+    </center>
     <h1 class="mb-3 text-center text-2xl font-bold">UPSSI-notes</h1>
 
     <p class="mb-6 text-center">
@@ -29,6 +32,9 @@
       >
         Obtenir mon relevé
       </button>
+      <p v-if="error" class="mt-3 text-center text-red-800">
+        Erreur dans l'identifiant, il doit contenir 8 chiffres
+      </p>
     </form>
   </div>
 </template>
@@ -47,8 +53,13 @@ const year_list = ref<YearList>({});
 // computed_values
 const years = computed(() => Object.keys(year_list.value));
 const semesters = computed(() => year_list.value[store.form.year]);
+const regex = /(22|21){1}\d{6}/g; // TODO FIX THIS
+
+const error = ref(false);
 
 onBeforeMount(async () => {
+  // REMOVE OLD ID
+  // store.form.id = "";
   year_list.value = await get_list();
   store.form.year = years.value[0];
   store.form.semester = semesters.value[0];
@@ -56,13 +67,17 @@ onBeforeMount(async () => {
 
 async function get_student_report(event: MouseEvent) {
   event.preventDefault();
-  store.state = "LOADING";
-  store.report = await get_report(
-    store.form.id,
-    store.form.year,
-    store.form.semester
-  );
-  store.state = "REPORT";
+  if (regex.test(store.form.id)) {
+    store.state = "LOADING";
+    store.report = await get_report(
+      store.form.id,
+      store.form.year,
+      store.form.semester
+    );
+    store.state = "REPORT";
+  } else {
+    error.value = true;
+  }
 }
 </script>
 

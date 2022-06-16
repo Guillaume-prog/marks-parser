@@ -1,10 +1,28 @@
 <template>
   <div v-if="report != null" class="flex flex-col gap-6 p-6">
     <div>
-      <h1 class="mb-6 text-center text-2xl font-bold">
+      <div class="flex items-center justify-between">
+        <button
+          @click="store.state = 'FORM'"
+          class="button px-3 py-2 hover:border-purple-500 hover:bg-purple-500 hover:text-white"
+        >
+          Retour
+        </button>
+
+        <img class="h-10" alt="logo" src="../assets/images/logo-upssi.png" />
+      </div>
+
+      <h1 class="mb-6 mt-6 text-center text-2xl font-bold">
         Promotion {{ store.form.year }} - Semestre {{ store.form.semester }}
       </h1>
-      <h3 class="mb-3">Numéro étudiant : {{ report.id }}</h3>
+
+      <div class="flex justify-between">
+        <h3 class="mt-3">Numéro étudiant : {{ report.id }}</h3>
+        <button @click="generatePdf()" class="py-2">
+          <img class="h-10" alt="pdf" src="../assets/images/pdf.png" />
+        </button>
+      </div>
+
       <p>Rang: {{ report.rank }}</p>
 
       <p>Ma note: {{ report.student }}</p>
@@ -24,7 +42,7 @@
         <p>{{ section.rank }}</p>
       </div>
 
-      <div>
+      <div class="flex justify-between">
         <div>
           <p>Ma note: {{ section.student }}</p>
           <p>
@@ -32,9 +50,13 @@
             {{ section.average }}
           </p>
         </div>
+
+        <button class="py-2" @click="changedDetailState()">
+          <vue-feather class="h-5" :type="changedImage()" />
+        </button>
       </div>
 
-      <table class="border-collapse">
+      <table v-if="detail" class="border-collapse">
         <tr>
           <th>Matière</th>
           <th>Note Min</th>
@@ -60,12 +82,26 @@
 <script setup lang="ts">
 import { useStore } from "@/store";
 import { storeToRefs } from "pinia";
-
+import { ref } from "vue";
 const store = useStore();
 const { report } = storeToRefs(store);
 
+const detail = ref(true);
+
 function round(mark: number): string {
   return (Math.round(mark * 100) / 100).toFixed(2);
+}
+
+function generatePdf() {
+  window.alert("Fonctionnalité en cours de développement ;)");
+}
+
+function changedDetailState() {
+  detail.value = !detail.value;
+}
+
+function changedImage(): string {
+  return detail.value ? "minimize-2" : "maximize-2";
 }
 </script>
 

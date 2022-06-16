@@ -33,6 +33,6 @@ const store = useStore();
 html,
 body,
 #app {
-  @apply m-0 h-full w-full overflow-scroll font-quicksand;
+  @apply m-0 h-full w-full font-quicksand;
 }
 </style>
