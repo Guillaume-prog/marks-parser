@@ -4,8 +4,10 @@
     <Loader v-if="store.state == 'LOADING'" />
     <Report v-if="store.state == 'REPORT'" />
   </div>
-  <footer class="bg-gray-800 px-6 py-4 text-white">
-    <div class="mx-auto flex w-1/2 justify-between">
+  <footer class="bg-gray-700 px-6 py-4 text-white">
+    <div
+      class="w-3/2 mx-auto flex flex-col justify-between gap-2 md:w-1/2 md:flex-row"
+    >
       <p>Site réalisé par Guillaume Roussin et Julian Trani</p>
       <p>
         Contribuer au projet sur
@@ -35,4 +37,5 @@ body,
 #app {
   @apply m-0 h-full w-full font-quicksand;
 }
+
 </style>

@@ -1,10 +1,10 @@
 <template>
-  <div v-if="report != null" class="flex flex-col gap-6 p-6">
+  <div v-if="report != null" class="flex flex-col gap-6 p-3">
     <div>
       <div class="flex items-center justify-between">
         <button
           @click="store.state = 'FORM'"
-          class="button px-3 py-2 hover:border-purple-500 hover:bg-purple-500 hover:text-white"
+          class="button border-gray-400 px-3 py-2 transition-colors focus:border-orange-400 focus:outline-none focus:ring-0"
         >
           Retour
         </button>
@@ -32,11 +32,15 @@
       </p>
     </div>
 
-    <div v-for="section in report.sections" class="flex flex-col gap-3">
+    <div
+      v-for="section in report.sections"
+      id="section"
+      class="flex flex-col gap-3"
+    >
       <hr class="mb-3 rounded-full border border-gray-200" />
 
       <div class="flex justify-between">
-        <h1 class="text-lg font-bold">
+        <h1 class="pr-2 text-lg font-bold">
           UE {{ report.sections.indexOf(section) + 1 }} - {{ section.name }}
         </h1>
         <p>{{ section.rank }}</p>
@@ -116,7 +120,7 @@ td:first-child {
 }
 
 th {
-  @apply border-purple-700;
+  @apply border-orange-400;
 }
 
 table tr:first-child {
@@ -128,6 +132,6 @@ tr:nth-child(2n + 1) {
 }
 
 tr:first-child {
-  @apply bg-purple-500;
+  @apply bg-orange-300;
 }
 </style>
