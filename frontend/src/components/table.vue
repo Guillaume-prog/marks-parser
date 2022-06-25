@@ -61,12 +61,6 @@ type UE = Mark & {
   marks: Mark[];
 };
 
-/* type Report = Stats & {
-  id: string;
-  rank: string;
-  sections: UE[];
-}; */
-
 const detail = ref(true);
 const props = defineProps<{
   numUE: number;
