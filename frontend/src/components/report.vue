@@ -37,8 +37,8 @@
       id="section"
       class="flex flex-col gap-3"
     >
-      <!-- <Table props=></Table> -->
-      <hr class="mb-3 rounded-full border border-gray-200" />
+      <Table :numUE="index" :ue="section"></Table>
+      <!-- <hr class="mb-3 rounded-full border border-gray-200" />
 
       <div class="flex justify-between">
         <h1 class="pr-2 text-lg font-bold">
@@ -79,13 +79,13 @@
             <b>{{ round(mark.student) }}</b>
           </td>
         </tr>
-      </table>
+      </table> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-/* import Table from "./table.vue"; */
+import Table from "./table.vue";
 import { useStore } from "@/store";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
