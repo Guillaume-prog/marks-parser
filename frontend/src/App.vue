@@ -37,5 +37,4 @@ body,
 #app {
   @apply m-0 h-full w-full font-quicksand;
 }
-
 </style>

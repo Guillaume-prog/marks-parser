@@ -1,5 +1,5 @@
 <template>
-  <div v-if="report != null" class="flex flex-col gap-6 p-3">
+  <div v-if="report != null" class="flex flex-col gap-6 p-4">
     <div>
       <div class="flex items-center justify-between">
         <button
@@ -33,10 +33,11 @@
     </div>
 
     <div
-      v-for="section in report.sections"
+      v-for="(section, index) in report.sections"
       id="section"
       class="flex flex-col gap-3"
     >
+      <!-- <Table props=></Table> -->
       <hr class="mb-3 rounded-full border border-gray-200" />
 
       <div class="flex justify-between">
@@ -60,7 +61,7 @@
         </button>
       </div>
 
-      <table v-if="detail" class="border-collapse">
+      <table v-if="detail" class="border-collapse text-xs md:text-base">
         <tr>
           <th>Matière</th>
           <th>Note Min</th>
@@ -84,6 +85,7 @@
 </template>
 
 <script setup lang="ts">
+/* import Table from "./table.vue"; */
 import { useStore } from "@/store";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
@@ -116,7 +118,7 @@ th {
 }
 
 td:first-child {
-  @apply w-64 text-left;
+  @apply w-auto break-words text-left;
 }
 
 th {

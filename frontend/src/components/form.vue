@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4">
     <center>
       <img
         class="w-64 pb-4"

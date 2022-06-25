@@ -19,7 +19,7 @@
         </button>
       </div> -->
 
-      <div class="italic bg-gray-200 mt-7 py-5 shadow-xl w-full">
+      <div class="mt-7 w-full bg-gray-200 py-5 italic shadow-xl">
         <img class="w-10" alt="logo" src="../assets/images/quote.png" />
         <p class="py-3 px-6">
           {{ quotes[index].split(" - ")[0] }}
@@ -41,6 +41,10 @@ const quotes = [
   "\"Le courage n'est pas l'absence de peur, mais la capacité de vaincre ce qui fait peur.\" - Nelson Mandela",
   '"La musique est la langue des émotions." - Emmanuel Kant',
   '"Vis simplement pour que d\'autres puissent simplement vivre." - Gandhi',
+  '"La vie sans musique est tout simplement une erreur, une torture, un exil." - Nietzsche',
+  "\"Les philosophes n'ont fait qu'interpréter le monde de différentes manières, ce qui importe, c’est de le transformer.\" - Karl Marx",
+  "\"Le bonheur est un rêve d'enfant réalisé dans l'âge adulte.\" - Freud",
+  '"La mort propre est irreprésentable. Dans l\'inconscient, chacun de nous est convaincu de son immortalité" - Freud',
 ];
 
 onBeforeMount(async () => {
