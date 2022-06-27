@@ -92,45 +92,25 @@ async function get_student_report(event: MouseEvent) {
 }
 </script>
 
-<style>
+<style sc>
 .button {
   @apply border border-gray-400 text-center transition-colors focus:border-orange-400 focus:outline-none focus:ring-0;
 }
 
-#button,
 #fieldID {
-  animation: 1s fadeInBot ease-in-out backwards;
+  animation: 1s fadeFromBot ease-in-out backwards;
+  animation-delay: 0.5s;
+}
+
+#button{
+  animation: 1s fadeFromBot ease-in-out backwards;  
+  animation-delay: 1s;
 }
 
 #img,
 #title,
 #description {
-  animation: 1s fadeInTop ease-in-out backwards;
+  animation: 1s fadeFromTop ease-in-out backwards;
 }
 
-@keyframes fadeInBot {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  99% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-@keyframes fadeInTop {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  99% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
 </style>

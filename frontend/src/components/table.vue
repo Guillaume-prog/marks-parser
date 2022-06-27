@@ -87,7 +87,11 @@ th {
 }
 
 td:first-child {
-  @apply w-64 text-left;
+  @apply w-auto break-words text-left;
+}
+
+td {
+  @apply w-14 md:w-20;
 }
 
 th {

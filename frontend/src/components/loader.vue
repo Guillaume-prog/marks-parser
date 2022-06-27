@@ -64,13 +64,4 @@ function goBack() {
 #loading {
   animation: 0.5s fadeIn ease-in-out backwards;
 }
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  99% {
-    opacity: 1;
-  }
-}
 </style>
