@@ -34,7 +34,8 @@
       </div>
     </div>
 
-    <div id="ue"
+    <div
+      id="ue"
       v-for="(section, index) in report.sections"
       class="flex flex-col gap-3"
     >
@@ -102,7 +103,7 @@ tr:first-child {
   animation-delay: 0.7s;
 }
 
-#ue{
+#ue {
   animation: 1s fadeIn ease-in-out backwards;
   animation-delay: 0.9s;
 }

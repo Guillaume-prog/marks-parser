@@ -17,6 +17,12 @@
     --gray-light: #949494;
   }
 
+  html,
+  body,
+  #app {
+    @apply m-0 h-full w-full font-quicksand;
+  }
+
   .background {
     @apply relative;
   }
