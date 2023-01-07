@@ -1,5 +1,7 @@
 <template>
-  <div class="grid h-full sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 place-items-center p-4">
+  <div
+    class="grid h-full place-items-center p-4 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1"
+  >
     <div class="flex flex-col gap-4">
       <select v-model="cur_file" @change="update_data">
         <option value="UE72-Python_DS">UE72 - Python DS</option>
@@ -42,7 +44,7 @@ const data = ref<{ [key: string]: string }>({});
 
 const marks = computed(() => {
   const marks = Object.values(data.value)
-    .map((mark) => Number.parseFloat(mark))
+    .map((mark) => Number.parseFloat(mark.replace(",", ".")))
     .filter((mark) => !isNaN(mark));
   return marks;
 });
