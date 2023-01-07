@@ -1,5 +1,5 @@
 <template>
-  <div class="grid h-full grid-cols-2 place-items-center p-4">
+  <div class="grid h-full sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 place-items-center p-4">
     <div class="flex flex-col gap-4">
       <select v-model="cur_file" @change="update_data">
         <option value="UE72-Python_DS">UE72 - Python DS</option>
@@ -13,8 +13,8 @@
         </option>
       </select>
       <div class="flex items-center gap-2">
-        <p>N° étudiant:</p>
-        <input type="text" v-model="user_id" />
+        <p class="w-32">N° étudiant:</p>
+        <input type="text" class="w-full" @blur="" v-model="user_id" />
       </div>
 
       <hr class="border border-neutral-300" />
@@ -26,7 +26,7 @@
         <Mark :mark="max" desc="Note max" />
       </div>
     </div>
-    <div class="w-2/3">
+    <div class="w-4/5 md:w-2/3">
       <Graph :marks="data" class="aspect-[4/3]" />
     </div>
   </div>
