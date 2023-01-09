@@ -1,37 +1,31 @@
 <template>
-  <v-chart
+  <!-- <div>Chart</div> -->
+  <Bar :data="chartData" :options="chartOptions" />
+  <!-- <v-chart
     class="chart overflow-hidden rounded-2xl"
     :option="option"
+    theme="dark"
     autoresize
-  />
+  /> -->
 </template>
 
 <script setup lang="ts">
-import { use } from "echarts/core";
-import { CanvasRenderer } from "echarts/renderers";
-import { BarChart } from "echarts/charts";
+import { Bar } from "vue-chartjs";
 import {
-  TitleComponent,
-  TooltipComponent,
-  LegendComponent,
-  GridComponent,
-} from "echarts/components";
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ChartOptions,
+} from "chart.js";
 
-import VChart, { THEME_KEY } from "vue-echarts";
-import { provide, computed } from "vue";
+import { ComputedRef } from "vue";
 
 // CHART SETUP
-
-use([
-  CanvasRenderer,
-  BarChart,
-  GridComponent,
-  TitleComponent,
-  TooltipComponent,
-  LegendComponent,
-]);
-
-provide(THEME_KEY, "dark");
+ChartJS.register(BarElement, CategoryScale, LinearScale);
 
 // PROPS HANDLING
 
@@ -56,19 +50,20 @@ const marks_distribution = computed(() => {
 
 // CHART OPTIONS
 
-const option = computed(() => ({
-  xAxis: {
-    data: x_data,
-  },
-  yAxis: {},
-  series: [
+const chartData = computed(() => ({
+  labels: x_data,
+  datasets: [
     {
-      name: "Notes",
-      type: "bar",
+      name: "Marks",
+      backgroundColor: "#4F46E5",
       data: marks_distribution.value,
     },
   ],
 }));
+
+const chartOptions = {
+  responsive: true,
+};
 </script>
 
 <style scoped>

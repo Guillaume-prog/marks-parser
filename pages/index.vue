@@ -46,23 +46,19 @@
 </template>
 
 <script setup lang="ts">
-import Graph from "./components/graph.vue";
-import Mark from "./components/mark.vue";
-
-import { ref, computed } from "vue";
-
 const data = ref<{ [key: string]: string }>({});
+const marks_files = import.meta.glob("~/data/marks/*.json");
 
 const marks = computed(() => {
   const marks = Object.values(data.value)
-    .map((mark) => Number.parseFloat(mark.replace(",", ".")))
-    .filter((mark) => !isNaN(mark));
+    .map((mark: string) => Number.parseFloat(mark.replace(",", ".")))
+    .filter((mark: number) => !isNaN(mark));
   return marks;
 });
 
 const cur_file = ref("UE72-Python_DS");
 const update_data = () => {
-  import(`./data/marks/${cur_file.value}.json`).then((new_data) => {
+  marks_files[`/data/marks/${cur_file.value}.json`]().then((new_data) => {
     data.value = new_data.default;
   });
 };

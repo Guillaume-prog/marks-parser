@@ -13,5 +13,8 @@
         "**/postcss.config.js": true,
 
         "**/tsconfig.*": true
-    }
+    },
+    
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
 }

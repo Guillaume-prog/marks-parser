@@ -1,33 +1,42 @@
-# UPSSI-notes
+# Nuxt 3 Minimal Starter
 
-UPSSI-notes is a web project for school. This app is able to get with a student ID to create a wonderful summary of the different semesters of the year you have chosen.
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-Authors : Guillaume Roussin - Julian Trani
+## Setup
 
-README last updated : 18/06/2022
+Make sure to install the dependencies:
 
-## Presentation
-
-With your student ID, you can generate a statement according to the selected semester.
-
-![Drag Racing](assets/accueil.png)
-
-## Usage
-
-- Backend
-
-Don't mention yet
-
-- Frontend
-   
-You need to move into the package frontend, and execute the following commands :
-
-(The first time you want to execute the frontend to generate the all the )
 ```bash
-npm i 
+# yarn
+yarn install
+
+# npm
+npm install
+
+# pnpm
+pnpm install --shamefully-hoist
 ```
+
+## Development Server
+
+Start the development server on http://localhost:3000
 
 ```bash
 npm run dev
 ```
 
+## Production
+
+Build the application for production:
+
+```bash
+npm run build
+```
+
+Locally preview production build:
+
+```bash
+npm run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
