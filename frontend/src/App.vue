@@ -7,6 +7,10 @@
         <option value="UE71-EPS">UE71 - Sport</option>
         <option value="UE72-Python_DS">UE72 - Python DS</option>
         <option value="UE72-Python_TP">UE72 - Python TP</option>
+        <option value="UE72-Optimisation_AC">
+          UE72 - Optimisation Avec Contraintes
+        </option>
+        <option value="UE72-Optimisation_TP">UE72 - Optimisation TP</option>
         <option value="UE73-Modelisation">UE73 - Modélisation</option>
         <option value="UE73-Analyse_DS">UE73 - Analyse de robots DS</option>
         <option value="UE73-Analyse_TP">UE73 - Analyse de robots TP</option>
@@ -17,7 +21,13 @@
       </select>
       <div class="flex items-center gap-2">
         <p class="w-32">N° étudiant:</p>
-        <input type="text" class="w-full" @blur="" v-model="user_id" />
+        <input
+          type="number"
+          class="w-full"
+          @blur=""
+          v-model="user_id"
+          placeholder="ex: 22454686"
+        />
       </div>
 
       <hr class="border border-neutral-300" />
