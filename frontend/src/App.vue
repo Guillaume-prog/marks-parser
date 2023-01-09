@@ -4,6 +4,7 @@
   >
     <div class="flex flex-col gap-4">
       <select v-model="cur_file" @change="update_data">
+        <option value="UE71-EPS">UE71 - Sport</option>
         <option value="UE72-Python_DS">UE72 - Python DS</option>
         <option value="UE72-Python_TP">UE72 - Python TP</option>
         <option value="UE73-Modelisation">UE73 - Modélisation</option>
@@ -57,7 +58,7 @@ const update_data = () => {
 };
 update_data();
 
-const user_id = ref("22108939");
+const user_id = ref("");
 
 const my_mark = computed(() => {
   return data.value[user_id.value];
