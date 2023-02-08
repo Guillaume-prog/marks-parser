@@ -20,8 +20,9 @@ module.exports = {
       },
 
       fontFamily: {
-        cursive: ["Send Flowers"],
         quicksand: ["Quicksand", "sans-serif"],
+        sofia: ["Sofia Sans", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },

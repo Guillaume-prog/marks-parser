@@ -5,16 +5,24 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "supabase:types": "supabase gen types typescript --project-id lurjjfuwritvnxsesbfi > types/supabase-types.ts"
   },
   "devDependencies": {
     "@nuxtjs/supabase": "^0.3.0",
     "@nuxtjs/tailwindcss": "^6.2.0",
     "@tailwindcss/forms": "^0.5.3",
+    "@types/formidable": "^2.0.5",
+    "@types/pdf-parse": "^1.1.1",
     "nuxt": "3.0.0"
   },
   "dependencies": {
+    "@vueuse/nuxt": "^9.10.0",
     "chart.js": "^4.1.2",
+    "formidable": "^2.1.1",
+    "nuxt-icon": "^0.1.8",
+    "pdfdataextract": "^3.2.0",
+    "supabase": "^1.36.5",
     "vue-chartjs": "^5.1.0"
   }
 }
