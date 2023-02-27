@@ -42,8 +42,8 @@ function updateValue() {
 }
 
 // validation
-const icon = computed(
-  () => "carbon:" + (props.isValid ? "checkmark" : "close")
+const icon = computed(() =>
+  props.isValid ? "carbon:checkmark" : "carbon:close"
 );
 </script>
 

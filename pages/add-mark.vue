@@ -1,137 +1,127 @@
 <template>
-  <div class="grid place-items-center h-full bg-neutral-100">
-    <div
-      class="w-8/12 shadow-md p-8 bg-white rounded-xl flex items-stretch gap-8"
-      :style="fixed_height"
-      ref="container"
-    >
-      <div class="max-w-lg w-full">
-        <h1 class="font-sofia text-2xl mb-2 text-center">
-          Ajouter une nouvelle note
-        </h1>
-        <hr class="my-4 border-neutral-200" />
+  <div class="h-full overflow-hidden">
+    <Modal id="step-1" title="Ajout d'une nouvelle note">
+      <promotion-select
+        v-model="promotion"
+        @update:verbose="promotion_str = $event"
+        class="w-full"
+      />
+      <Select name="Type de note" :options="exam_types" v-model="exam_type" />
 
-        <div class="flex flex-col gap-2">
-          <p
-            class="border-2 border-red-400 bg-red-100 px-3 py-2 rounded-lg text-sm"
-            v-if="error"
-          >
-            Oops ! Something went wrong.
-          </p>
+      <MagicButton type="next" target="step-2" :validation="step1_complete" />
+    </Modal>
 
-          <div>
-            <p class="text-sm mb-1 ml-1">Promotion</p>
-            <promotion-select v-model="promotion" class="w-full" />
-          </div>
+    <Modal id="step-2" title="Choix de la matière">
+      <SubjectSelect @update="code = $event" />
 
-          <div class="flex justify-between items-center gap-2">
-            <div class="flex-grow">
-              <p class="text-sm mb-1 ml-1">Semestre</p>
-              <select
-                v-model="semester"
-                :class="{ 'text-neutral-500': semester == null }"
-                class="input-style w-full"
-              >
-                <option disabled selected :value="null">Semestre X</option>
-                <option v-for="sem in range(5, 10)" :value="sem">
-                  Semestre {{ sem }}
-                </option>
-              </select>
-            </div>
+      <div class="button_container">
+        <MagicButton type="back" target="step-1" />
+        <MagicButton type="next" target="step-3" :validation="step2_complete" />
+      </div>
+    </Modal>
 
-            <div class="flex-grow">
-              <p class="text-sm mb-1 ml-1">UE</p>
-              <select
-                v-model="section"
-                :class="{ 'text-neutral-500': section == null }"
-                class="input-style w-full"
-              >
-                <option disabled selected :value="null">UE Y</option>
-                <option v-for="ue in range(1, 3)" :value="ue">
-                  UE {{ ue }}
-                </option>
-              </select>
-            </div>
-          </div>
+    <Modal id="step-3" title="Ajout des notes">
+      <MarkSelect @on:result="marks = $event" />
 
-          <ValidInput
-            name="Nom de la note"
-            placeholder="ex: Commande de robots - DS"
-            :is-valid="true"
-            v-model="name"
-          />
+      <div class="button_container">
+        <MagicButton type="back" target="step-2" />
+        <MagicButton type="next" target="step-4" :validation="step3_complete" />
+      </div>
+    </Modal>
 
-          <div>
-            <p class="text-sm mb-1 ml-1">Fichier de notes</p>
-            <drag-n-drop @update="update_file" />
-          </div>
-
-          <button class="input-button" @click="save" :disabled="save_disabled">
-            Save
-          </button>
+    <Modal id="step-4" title="Récapitulatif">
+      <div class="relative">
+        <div v-for="[label, stat] in stats">
+          <p class="text-sm mb-1">{{ label }}</p>
+          <p class="text-lg font-bold">{{ stat }}</p>
         </div>
+
+        <Popup v-if="is_success" :success="is_success" />
       </div>
 
-      <div class="h-full border-r border-gray-200"></div>
-
-      <div class="overflow-scroll h-full flex-grow">
-        <MarksTable v-if="marks" :marks="marks" />
+      <div v-if="is_success == null" class="button_container">
+        <MagicButton type="back" target="step-3" />
+        <button
+          class="input-button w-1/3"
+          :disabled="!step4_complete"
+          @click="upload"
+        >
+          Terminer
+        </button>
       </div>
-    </div>
+      <div v-else>
+        <button v-if="is_success" class="input-button w-1/2" @click="reload">
+          Recommencer
+        </button>
+        <button v-else class="input-button w-full" @click="upload">
+          Réessayer
+        </button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script setup lang="ts">
-const name = ref("");
-const promotion = ref("");
+import { Mark } from "~~/types/marks-list";
 
-const semester = ref(null);
-const section = ref(null);
+const exam_types = new Map([
+  ["cc", "Controle Continu"],
+  ["tp", "Travaux Pratiques"],
+]);
 
-const marks = ref({});
+const promotion = ref<string | null>(null);
+const exam_type = ref<"cc" | "tp" | null>(null);
+const code = ref<string | null>(null);
+const marks = ref<Record<string, Mark> | null>(null);
 
-const container = ref();
-const fixed_height = computed(() => {
+const promotion_str = ref("");
+const stats = computed(() => [
+  ["Promotion", promotion_str.value],
+  ["Matière", code.value!],
+  ["Type de note", exam_types.get(exam_type.value!)],
+]);
+
+// Scrolling
+
+const step1_complete = computed(
+  () => promotion.value != null && exam_type.value != null
+);
+const step2_complete = computed(() => code.value != null);
+const step3_complete = computed(() => marks.value != null);
+const step4_complete = computed(() => payload.value != null);
+
+// Payload
+
+const is_success = ref<boolean | null>(null);
+
+type MarkObj = SupabaseType<"marks", "Insert">;
+const payload = computed<MarkObj | null>(() => {
+  if (!code.value || !promotion.value || !exam_type.value || !marks.value)
+    return null;
+
   return {
-    height: container.value?.clientHeight + "px",
+    promotion: promotion.value,
+    exam_type: exam_type.value,
+    subject_id: code.value,
+    marks: marks.value,
   };
 });
 
-const file = ref<File | null>(null);
-const update_file = (files: File[]) => {
-  file.value = files[0];
+const upload = async () => {
+  const { data, error } = await useSupabase()
+    .from("marks")
+    .insert(payload.value!);
+
+  is_success.value = error == null;
 };
 
-const save_disabled = computed(() => {
-  return !file.value; //!name.value || !promotion.value || !section.value || !file.value;
-});
-
-async function save() {
-  const formData = new FormData();
-  formData.append("file", file.value!);
-
-  const { marks: m_marks } = await $fetch("/api/parse_pdf", {
-    method: "POST",
-    body: formData,
-  });
-
-  marks.value = m_marks;
-  students.value.push(Object.keys(m_marks));
-}
-
-const range = (start: number, end?: number) => {
-  if (!end) {
-    end = start;
-    start = 0;
-  }
-  let arr = [start];
-  while (start++ !== end) {
-    arr.push(start);
-  }
-  return arr;
+const reload = () => {
+  window.location.reload();
 };
-
-const error = ref(false);
 </script>
 
-<style scoped></style>
+<style scoped>
+.button_container {
+  @apply flex items-center gap-3 justify-around;
+}
+</style>

@@ -11,25 +11,42 @@ export interface Database {
     Tables: {
       marks: {
         Row: {
+          exam_type: string | null
           id: string
           marks: Json
-          name: string
-          promotion: string | null
-          section: number
+          promotion: string
+          subject_id: string
         }
         Insert: {
+          exam_type?: string | null
           id?: string
           marks: Json
-          name: string
-          promotion?: string | null
-          section: number
+          promotion: string
+          subject_id: string
+        }
+        Update: {
+          exam_type?: string | null
+          id?: string
+          marks?: Json
+          promotion?: string
+          subject_id?: string
+        }
+      }
+      mcc: {
+        Row: {
+          id: string
+          mcc: Json
+          semester: number
+        }
+        Insert: {
+          id: string
+          mcc: Json
+          semester: number
         }
         Update: {
           id?: string
-          marks?: Json
-          name?: string
-          promotion?: string | null
-          section?: number
+          mcc?: Json
+          semester?: number
         }
       }
       promotions: {

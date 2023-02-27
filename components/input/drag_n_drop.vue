@@ -1,10 +1,10 @@
 <template>
   <label
-    class="aspect-video border-2 border-dashed p-2 border-gray-300 text-neutral-500 grid place-items-center cursor-pointer"
+    class="aspect-[2/1] border-2 border-dashed p-2 border-gray-300 rounded-lg text-neutral-500 grid place-items-center cursor-pointer"
     :class="{ 'border-blue-400': dragging }"
-    @dragover.prevent
     @dragenter.prevent="dragging = true"
     @dragleave.prevent="dragging = false"
+    @dragover.prevent
     @drop.prevent="handleDrop"
   >
     <p v-if="files == null" class="pointer-events-none">
@@ -17,11 +17,9 @@
       {{ files[0].name }}
     </p>
 
-    <p>{{ files }}</p>
-
     <input
       type="file"
-      :multiple="props.multiple"
+      :multiple="multiple"
       class="hidden"
       @change="handleUpload"
     />
@@ -43,9 +41,7 @@ const files = ref<File[] | null>(null);
 function handleDrop(e: DragEvent) {
   dragging.value = false;
   const payload = e.dataTransfer?.files ?? null;
-
-  console.log(payload);
-
+  console.log(e.dataTransfer?.files);
   update(payload);
 }
 
@@ -55,7 +51,7 @@ function handleUpload(e: Event) {
 }
 
 const update = (payload: FileList | null) => {
-  if (!payload) return;
+  if (payload == null || payload.length == 0) return;
 
   const arr = Array.from(payload);
   files.value = props.multiple ? arr : [arr[0]];

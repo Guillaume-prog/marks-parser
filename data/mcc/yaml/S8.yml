@@ -1,0 +1,96 @@
+Semestre 8:
+  - code: EMURO2DM
+    name: STAGE
+    subjects:
+      - code: EMURO2D1
+        name: Stage
+        percentage:
+          section: 100
+          cc: 66
+          tp: 34
+
+  - code: EMURO2AM
+    name: Sciences économiques, humaines et sociales, langues 4
+    subjects:
+      - code: EMUMC2A1
+        name: Langues
+        percentage:
+          section: 50
+          cc: 100
+          tp: 0
+
+      - code: EMURO2A1
+        name: Qualité
+        percentage:
+          section: 25
+          cc: 100
+          tp: 0
+
+      - code: EMUMC2A2
+        name: EPS
+        percentage:
+          section: 25
+          cc: 100
+          tp: 0
+
+  - code: EMURO2BM
+    name: Sciences et techniques 5
+    subjects:
+      - code: EMURO2B1
+        name: Programmation multi-tâche et systèmes temps réel
+        percentage:
+          section: 30
+          cc: 70
+          tp: 30
+
+      - code: EMURO2B2
+        name: IA - Méthodes de résolution de problèmes
+        percentage:
+          section: 30
+          cc: 60
+          tp: 40
+
+      - code: EMURO2B3
+        name: IA - Apprentissage automatique et apprentissage profond
+        percentage:
+          section: 30
+          cc: 70
+          tp: 30
+
+      - code: EMURO2B4
+        name: Projet SRI7 - Application
+        percentage:
+          section: 10
+          cc: 100
+          tp: 0
+
+  - code: EMURO2CM
+    name: Sciences et techniques 6
+    subjects:
+      - code: EMURO2C1
+        name: Mouvement et naviguation robotique
+        percentage:
+          section: 30
+          cc: 70
+          tp: 30
+
+      - code: EMURO2C2
+        name: Traitement et synthèse de la parole
+        percentage:
+          section: 30
+          cc: 70
+          tp: 30
+
+      - code: EMURO2C3
+        name: Traitement et synthèse d'images
+        percentage:
+          section: 30
+          cc: 70
+          tp: 30
+
+      - code: EMURO2C4
+        name: Projet SRI8 - Intégration
+        percentage:
+          section: 10
+          cc: 50
+          tp: 50

@@ -7,13 +7,13 @@ declare global {
 
   type MarksFile = { [key: string]: string };
 
-  type Mark = {
-    id?: string;
-    promotion: string;
-    section: number;
-    name: string;
-    marks: MarksFile;
-  };
+  // type Mark = {
+  //   id?: string;
+  //   promotion: string;
+  //   section: number;
+  //   name: string;
+  //   marks: MarksFile;
+  // };
 }
 
 export {};

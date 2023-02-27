@@ -25,17 +25,18 @@ export default defineEventHandler(async (event) => {
     register.add(cur_student, line);
   }
 
-  console.log("done");
+  console.log("\n=== DONE ===\n\n\n");
   register.fill_missing_marks();
   return { marks: register.get_all() };
 });
 
 const is_absent = (line: string) => /^AB/.test(line);
 const is_mark = (line: string) => /^\d{1,2}(\.\d{1,2})?\b/.test(line);
-const is_student_id = (line: string) => /^\d{8}$/.test(line);
+const is_student_id = (line: string) => /^\d{8}\S?/.test(line);
 
 function preprocess_data(data: string) {
-  // Magic regex decomposed /(^\d{8}$)|(^AB)|(^\d{1,2}(\.\d{1,2})?\b)/;
+  data = data.split(/moyenne/gi)[0];
+
   return data
     .split("\n")
     .map((line) => line.replace(",", ".").trim())
@@ -47,7 +48,7 @@ async function load_text(file: formidable.File) {
   const buffer = readFileSync(file.filepath);
   const data = await PdfData.extract(buffer);
 
-  return data.text![0];
+  return data.text!.join("\n");
 }
 
 function parseForm(event: any): Promise<Form> {

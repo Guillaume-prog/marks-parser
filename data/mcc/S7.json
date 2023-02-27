@@ -1,0 +1,147 @@
+[
+  {
+    "code": "EMURO1BM",
+    "name": "Sciences et techniques 3",
+    "subjects": [
+      {
+        "code": "EMURO1B1",
+        "name": "Estimation et optimisation pour la robotique",
+        "percentage": {
+          "section": 33,
+          "cc": 70,
+          "tp": 30
+        }
+      },
+      {
+        "code": "EMURO1B2",
+        "name": "Modèles pour le parrallélisme",
+        "percentage": {
+          "section": 33,
+          "cc": 70,
+          "tp": 30
+        }
+      },
+      {
+        "code": "EMURO1B3",
+        "name": "Programmation avancée",
+        "percentage": {
+          "section": 34,
+          "cc": 70,
+          "tp": 30
+        },
+        "sub_subjects": [
+          { "code": "EMURO1B3_1", "name": "Python" },
+          { "code": "EMURO1B3_2", "name": "C++" }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "EMURO1CM",
+    "name": "Sciences et techniques 4",
+    "subjects": [
+      {
+        "code": "EMURO1C1",
+        "name": "Commande de robots industriels",
+        "percentage": {
+          "section": 20,
+          "cc": 70,
+          "tp": 30
+        }
+      },
+      {
+        "code": "EMURO1C2",
+        "name": "Modélisation de systèmes robotiques",
+        "percentage": {
+          "section": 40,
+          "cc": 70,
+          "tp": 30
+        }
+      },
+      {
+        "code": "EMURO1C3",
+        "name": "Optimisation et commande pour la robotique",
+        "percentage": {
+          "section": 30,
+          "cc": 70,
+          "tp": 30
+        }
+      },
+      {
+        "code": "EMURO1C4",
+        "name": "Projet SRI6 - Introduction à ROS",
+        "percentage": {
+          "section": 10,
+          "cc": 0,
+          "tp": 100
+        }
+      }
+    ]
+  },
+  {
+    "code": "EMURO1AM",
+    "name": "Sciences économiques, humaines et sociales, langues 3",
+    "subjects": [
+      {
+        "code": "EMUMC1A1",
+        "name": "Langues",
+        "sub_subjects": [
+          { "code": "EMUMC1A1_1", "name": "Anglais Professionnel" },
+          { "code": "EMUMC1A1_2", "name": "Anglais Scientifique" },
+          { "code": "EMUMC1A1_3", "name": "Anglais pour les Debats" },
+          { "code": "EMUMC1A1_4", "name": "LV2" }
+        ],
+        "percentage": {
+          "section": 25,
+          "cc": 100,
+          "tp": 0
+        }
+      },
+      {
+        "code": "EMURO1A4",
+        "name": "Création d'entreprise stratégie, marketing, finance",
+        "percentage": {
+          "section": 25,
+          "cc": 100,
+          "tp": 0
+        }
+      },
+      {
+        "code": "EMURO1A3",
+        "name": "SHS",
+        "percentage": {
+          "section": 13,
+          "cc": 100,
+          "tp": 0
+        }
+      },
+      {
+        "code": "EMUMC1A2",
+        "name": "EPS",
+        "percentage": {
+          "section": 12,
+          "cc": 100,
+          "tp": 0
+        }
+      },
+      {
+        "code": "EMURO1A1",
+        "name": "Initiation à la recherche et TER",
+        "percentage": {
+          "section": 3,
+          "cc": 100,
+          "tp": 0
+        }
+      },
+      {
+        "code": "EMURO1A2",
+        "name": "Projet SRI5 - TER",
+        "percentage": {
+          "section": 22,
+          "cc": 50,
+          "tp": 50
+        }
+      }
+    ]
+  }
+]

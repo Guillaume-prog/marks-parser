@@ -7,4 +7,10 @@ export default defineNuxtConfig({
     "nuxt-icon",
   ],
   css: ["~/assets/main.css"],
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
 });
