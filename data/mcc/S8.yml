@@ -38,7 +38,7 @@ Semestre 8:
     subjects:
       - code: EMURO2B1
         name: Programmation multi-tâche et systèmes temps réel
-        subsubjects:
+        sub_subjects:
           - code: EMURO2B1_1
             name: Programmation multi-tâche
           - code: EMURO2B1_2
@@ -57,7 +57,7 @@ Semestre 8:
 
       - code: EMURO2B3
         name: IA - Apprentissage automatique et apprentissage profond
-        subsubjects:
+        sub_subjects:
           - code: EMURO2B3_1
             name: Classification
           - code: EMURO2B3_2
@@ -79,7 +79,7 @@ Semestre 8:
     subjects:
       - code: EMURO2C1
         name: Mouvement et naviguation robotique
-        subsubjects:
+        sub_subjects:
           - code: EMURO2C1_1
             name: Génération et planification de mouvements
           - code: EMURO2C1_2
@@ -102,7 +102,7 @@ Semestre 8:
 
       - code: EMURO2C3
         name: Traitement et synthèse d'images
-        subsubjects:
+        sub_subjects:
           - code: EMURO2C3_1
             name: Traitement d'images
           - code: EMURO2C3_2

@@ -4,7 +4,7 @@ Semestre 7:
     subjects:
       - code: EMURO1B1
         name: Estimation et optimisation pour la robotique
-        subsubjects:
+        sub_subjects:
           - code: EMURO1B1_1
             name: Estimation
           - code: EMURO1B1_2
@@ -23,7 +23,7 @@ Semestre 7:
 
       - code: EMURO1B3
         name: Programmation avancée
-        subsubjects:
+        sub_subjects:
           - code: EMURO1B3_1
             name: Python
           - code: EMURO1B3_2
@@ -45,7 +45,7 @@ Semestre 7:
 
       - code: EMURO1C2
         name: Modélisation de systèmes robotiques
-        subsubjects:
+        sub_subjects:
           - code: EMURO1C2_1
             name: Modélisation
           - code: EMURO1C2_2
@@ -57,7 +57,7 @@ Semestre 7:
 
       - code: EMURO1C3
         name: Optimisation et commande pour la robotique
-        subsubjects:
+        sub_subjects:
           - code: EMURO1C3_1
             name: Optimisation avec contraintes
           - code: EMURO1C3_2
@@ -79,7 +79,7 @@ Semestre 7:
     subjects:
       - code: EMUMC1A1
         name: Langues
-        subsubjects:
+        sub_subjects:
           - code: EMUMC1A1_1
             name: Communication scientifique
           - code: EMUMC1A1_2
@@ -116,7 +116,7 @@ Semestre 7:
 
       - code: EMURO1A1
         name: Initiation à la recherche et TER
-        subsubjects:
+        sub_subjects:
           - code: EMURO1A1_1
             name: Recherche bibliographique
           - code: EMURO1A1_2
