@@ -4,6 +4,11 @@ Semestre 7:
     subjects:
       - code: EMURO1B1
         name: Estimation et optimisation pour la robotique
+        subsubjects:
+          - code: EMURO1B1_1
+            name: Estimation
+          - code: EMURO1B1_2
+            name: Optimisation sans contraintes
         percentage:
           section: 33
           cc: 70
@@ -40,6 +45,11 @@ Semestre 7:
 
       - code: EMURO1C2
         name: Modélisation de systèmes robotiques
+        subsubjects:
+          - code: EMURO1C2_1
+            name: Modélisation
+          - code: EMURO1C2_2
+            name: Robotique mobile
         percentage:
           section: 40
           cc: 70
@@ -47,6 +57,11 @@ Semestre 7:
 
       - code: EMURO1C3
         name: Optimisation et commande pour la robotique
+        subsubjects:
+          - code: EMURO1C3_1
+            name: Optimisation avec contraintes
+          - code: EMURO1C3_2
+            name: Analyse et Commande
         percentage:
           section: 30
           cc: 70
@@ -64,6 +79,15 @@ Semestre 7:
     subjects:
       - code: EMUMC1A1
         name: Langues
+        subsubjects:
+          - code: EMUMC1A1_1
+            name: Communication scientifique
+          - code: EMUMC1A1_2
+            name: Communication professionnelle
+          - code: EMUMC1A1_3
+            name: Job interview
+          - code: EMUMC1A1_4
+            name: LV2
         percentage:
           section: 25
           cc: 100
@@ -92,6 +116,11 @@ Semestre 7:
 
       - code: EMURO1A1
         name: Initiation à la recherche et TER
+        subsubjects:
+          - code: EMURO1A1_1
+            name: Recherche bibliographique
+          - code: EMURO1A1_2
+            name: Gestion de projet
         percentage:
           section: 3
           cc: 100
