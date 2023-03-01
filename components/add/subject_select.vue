@@ -11,7 +11,7 @@
       <Select name="Matière" :options="subjects" v-model="subject" />
 
       <Select
-        v-if="subsubjects"
+        v-if="subsubjects.size != 0"
         name="Sous-matière"
         :options="subsubjects"
         v-model="subsubject"
@@ -31,7 +31,7 @@ const subsubject = ref<NameCode | null>(null);
 // Compute return value
 const code = computed(() => {
   if (!semester.value || !section.value || !subject.value) return null;
-  if (subsubjects.value && !subsubject.value) return null;
+  if (subsubjects.value.size != 0 && !subsubject.value) return null;
 
   return subsubject.value ? subsubject.value!.code : subject.value!.code;
 });
@@ -46,16 +46,16 @@ watch(code, (new_value) => {
 
 // Options for selects
 const semesters = new Map(range(7, 8).map((sem) => [sem, `Semestre ${sem}`]));
-const sections = computed(() => new Map(mcc.value?.map((ue) => [ue, ue.name])));
+const sections = computed(() => to_sorted_map(mcc.value));
+const subjects = computed(() => to_sorted_map(section.value?.subjects));
+const subsubjects = computed(() => to_sorted_map(subject.value?.sub_subjects));
 
-const subjects = computed(
-  () => new Map(section.value?.subjects.map((s) => [s, s.name]))
-);
-
-const subsubjects = computed(() => {
-  if (subject.value?.sub_subjects == undefined) return null;
-  return new Map(subject.value?.sub_subjects.map((s) => [s, s.name]));
-});
+const to_sorted_map = (list: NameCode[] | null | undefined) => {
+  if (list == undefined || list == null) return new Map();
+  return new Map(
+    list.sort((a, b) => a.code.localeCompare(b.code)).map((s) => [s, s.name])
+  );
+};
 
 // Reset other child options when parent changes
 watch(

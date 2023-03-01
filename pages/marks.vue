@@ -1,43 +1,42 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full bg-neutral-100">
     <Header></Header>
-    <div
-      class="flex-grow grid place-items-center p-4 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1"
-    >
-      <div class="flex flex-col gap-4 w-1/2">
-        <div v-for="section in sections">
-          <p class="font-semibold mb-3">UE {{ section }}</p>
-          <div class="flex flex-col gap-3">
-            <div
-              v-for="mark in section_marks(section)"
-              :key="mark.id"
-              class="p-2 rounded-md cursor-pointer hover:bg-neutral-100 transition-colors"
-              :class="{
-                'bg-blue-100': is_current(mark.id),
-                'hover:bg-blue-100': is_current(mark.id),
-              }"
-              @click="select_mark(mark.id)"
-            >
-              {{ mark.name }}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <MarkDisplay
-        :data="cur_marks"
-        :student_id="student_id"
-        class="w-4/5 md:w-2/3"
-      />
-    </div>
+    <main>
+      <section>
+        <Select
+          name="Semestre"
+          :options="semesters"
+          v-model="semester"
+          class="-mt-2"
+        />
+      </section>
+
+      <section class="overflow-y-scroll">
+        <MarksTree :semester="semester" />
+      </section>
+
+      <section class="grid place-items-center">Stats</section>
+
+      <section class="grid place-items-center">
+        <MarkDisplay
+          :data="cur_marks"
+          :student_id="student_id"
+          class="w-4/5 md:w-2/3"
+        />
+      </section>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
-const { student_id, promotion } = (await useUser()) ?? {
-  student_id: "",
-  promotion: "",
-};
+const user = await useUser();
+if (!user) useRouter().push("/");
+const { student_id, promotion } = user!;
+
+// Semester select
+const semesters = new Map(range(7, 8).map((i) => [i, `Semestre ${i}`]));
+const semester = ref(8);
 
 const marks = await (async () => {
   const { data } = await useSupabase()
@@ -48,16 +47,16 @@ const marks = await (async () => {
   return data;
 })();
 
-const sections = computed(() => {
-  return marks
-    ?.map((mark) => mark.section)
-    .sort((a, b) => a - b)
-    .filter((value, index, self) => self.indexOf(value) === index);
-});
+// const sections = computed(() => {
+//   return marks
+//     ?.map((mark) => mark.section)
+//     .sort((a, b) => a - b)
+//     .filter((value, index, self) => self.indexOf(value) === index);
+// });
 
-const section_marks = (section: number) => {
-  return marks?.filter((mark) => mark.section === section);
-};
+// const section_marks = (section: number) => {
+//   return marks?.filter((mark) => mark.section === section);
+// };
 
 const cur_mark_id = ref("");
 
@@ -83,4 +82,33 @@ const update_data = () => {
 update_data();
 </script>
 
-<style scoped></style>
+<style scoped>
+main {
+  @apply grid gap-8 grid-cols-2 grid-rows-3 w-full max-w-[1600px] h-[800px] mx-auto overflow-hidden;
+  grid-template-rows: auto auto 1fr;
+}
+
+section {
+  @apply bg-white rounded-lg p-8;
+}
+
+section:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+section:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2 / 4;
+}
+
+section:nth-child(3) {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+section:nth-child(4) {
+  grid-column: 2;
+  grid-row: 3;
+}
+</style>
